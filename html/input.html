@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+			crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+			crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<form action="input.php" method="POST">
+		<fieldset>
+			<legend>Add User</legend>
+			<input type='text' name='firstname' placeholder='First Name' /><br/>
+			<input type='text' name='lastname' placeholder='Last Name' /><br/>
+			<input type='text' name='emailaddress' placeholder='E-Mail' /><br/>
+			<input type='text' name='username' placeholder='Username' /><br/>
+			<input type='password' name='password' placeholder='Password' /><br/>
+			<input type='password' name='verify_password' placeholder='Verify Password' /><br/><br/>
+			<input type="submit" value="Submit" name="go_add" />
+		</fieldset>
+	</form>
+</body>
+
+</html>
