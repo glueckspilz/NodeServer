@@ -12,7 +12,7 @@ config.mysql.password = "";
 config.mysql.database = "SecuMod";
 
 
-config.server.port = 5566;
+config.server.port = 567;
 
 module.exports = config;
 
