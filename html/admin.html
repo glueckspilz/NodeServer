@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="javascript/moustache.min.js"></script>
+    <link rel="stylesheet" href="css/admin_css.css">
     <script>
 
 
@@ -116,6 +117,7 @@
         $.post('/admin/addUser',obj);     
         
         update_table();
+
     }
 
     function disable_delete(val)

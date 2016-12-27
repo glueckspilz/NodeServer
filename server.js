@@ -8,7 +8,6 @@ var app = express();
 var config = require('./cfg/config');
 var route_index = require('./routes/index');
 var route_login = require('./routes/login');
-var route_input = require('./routes/input');
 var route_admin = require('./routes/admin');
 
 
@@ -23,7 +22,6 @@ app.use(bodyParser.urlencoded({
 /*Setting up the routes*/
 app.use('/', route_index);
 app.use('/login', route_login);
-app.use('/input', route_input);
 app.use('/admin',route_admin);
 
 app.listen(config.server.port);
