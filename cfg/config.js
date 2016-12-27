@@ -1,4 +1,3 @@
-hallo
 var config = {};
 
 /*Objects*/
