@@ -1,18 +1,24 @@
+/*Imports: System*/
+var secu_crypto = require('../secu_crypto');
 var express = require('express');
 var router = express.Router();
-
 var mysql = require('mysql');
-
 var path = require('path');
+
+/*Imports: User*/
 var config = require('../cfg/config');
 
+/*MySQL Init */
 var connection = mysql.createConnection(config.mysql);
 
-var admin = function (req, res) {
+
+
+
+function root(req, res) {
     res.sendFile(path.resolve("html/admin.html"));
 };
 
-var handle = function (req, res) {
+function getUsers(req, res) {
     connection.query("SELECT * FROM Users", function (err, rows, fields) {
         if (!err) {
             res.json(rows);
@@ -22,7 +28,7 @@ var handle = function (req, res) {
     });
 };
 
-var removeUser = function (req, res) {
+function removeUser(req, res) {
     for (var i = 0; i < req.body.ids.length; i++) {
         connection.query("DELETE FROM Users WHERE UserID=?", [req.body.ids[i]], function (err, rows, fields) {
             if (!err) {
@@ -36,45 +42,60 @@ var removeUser = function (req, res) {
     res.end();
 }
 
-var addUser = function (req, res) {
+function addUser(req, res) {
     var vals = [];
     for (var o in req.body) {
         vals.push(req.body[o]);
     }
-
-    connection.query("INSERT INTO Users VALUES(NULL,?,?,?,?,?)", vals, function (err, rows, fields) {
-        if (!err) {
-            res.end();
-        } else {
-            console.log(err);
-            res.end();
-        }
+    secu_crypto.password_hash(vals[4],10,function(err,finalString){
+        vals[4]=finalString;
+        connection.query("INSERT INTO Users VALUES(NULL,?,?,?,?,?)", vals, function (err, rows, fields) {
+            if (!err) {
+                res.end();
+            } else {
+                console.log(err);
+                res.end();
+            }
+        });
+            
     });
     res.end();
 }
 
-var updateUser = function (req, res) {
+function updateUser(req, res) {
     var vals = [];
     for (var o in req.body) {
         vals.push(req.body[o]);
     }
-    connection.query("UPDATE Users SET FirstName=?, LastName=?, EmailAddress=?, Username=?, Password=? WHERE UserID=? ", vals, function (err, rows, fields) {
-        if (!err) {
-            res.end();
-        } else {
-            console.log(err);
-            res.end();
-        }
+    secu_crypto.password_hash(vals[4],10,function(err,finalString){
+        vals[4]=finalString;
+        connection.query("UPDATE Users SET FirstName=?, LastName=?, EmailAddress=?, Username=?, Password=? WHERE UserID=? ", vals, function (err, rows, fields) {
+            if (!err) {
+                res.end();
+            } else {
+                console.log(err);
+                res.end();
+            }
+        });
     });
     res.end();
 }
 
-router.get('/', admin);
-router.get('/getUsers', handle);
 
 
+/*Setup: Routes*/
+
+//GET
+router.get('/', root);
+router.get('/getUsers', getUsers);
+
+
+//POST
 router.post('/removeUser', removeUser);
 router.post('/addUser', addUser);
 router.post('/updateUser', updateUser);
+
+
+
 
 module.exports = router;
