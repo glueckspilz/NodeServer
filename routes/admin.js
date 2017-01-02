@@ -70,8 +70,8 @@ var updateUser = function (req, res) {
 }
 
 router.get('/', admin);
-
 router.get('/getUsers', handle);
+
 
 router.post('/removeUser', removeUser);
 router.post('/addUser', addUser);

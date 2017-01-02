@@ -119,7 +119,7 @@ function update_table(){
             "columns": globals.columns,
             "data": data,
             "pagination": true,
-            "pageSize": 5,
+            "pageSize": 10,
             "search": true,
             onCheck: function(row,element){
                 console.log(row);
