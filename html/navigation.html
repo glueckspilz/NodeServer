@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+</head>
+<body>
+<div class="w3-container w3-orange" >
+    <span class="w3-opennav w3-xlarge" onclick="w3_open()">&#9776;</span>
+    <img src="assets/logo.png" style="max-height: 50px;width:auto" href="#">
+</div>
+<nav class="w3-sidenav w3-white w3-card-2" style="display:none" id="mySidenav">
+  <a href="javascript:void(0)" onclick="w3_close()" 
+  class="w3-closenav w3-large">Close &times;</a>
+  <a href="#">1</a>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+</nav>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+}
+</script>
+     
+</body>
+</html> 
+</html>
