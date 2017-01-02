@@ -12,9 +12,11 @@ config.mysql.password = "";
 config.mysql.database = "SecuMod";
 
 
+
 config.server.port = 5566;
 config.server.cert = "ssl/server.crt";
 config.server.key = "ssl/server.key";
+
 
 module.exports = config;
 
