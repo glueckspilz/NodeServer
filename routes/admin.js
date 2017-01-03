@@ -54,21 +54,39 @@ function removeUser(req, res) {
 
 function addUser(req, res) {
     var vals = [];
+    var userexists=false;
     for (var o in req.body) {
         vals.push(req.body[o]);
     }
-    secu_crypto.password_hash(vals[4],10,function(err,finalString){
-        vals[4]=finalString;
-        connection.query("INSERT INTO Users VALUES(NULL,?,?,?,?,?)", vals, function (err, rows, fields) {
-            if (!err) {
-                res.end();
-            } else {
-                console.log(err);
-                res.end();
-            }
-        });
-            
+    connection.query("SELECT * FROM Users WHERE Username=?",[vals[3]],function (err, rows, fields){
+        if (rows.length>0){
+            userexists=true;
+        }
+        else{
+            userexists=false;
+        }
     });
+    if (vals[3]==""||vals[3]==undefined||vals[4]==""||vals[4]==undefined){
+        console.log("username and password can't be empty!");//TODO: add user notify
+
+    }
+    else if (userexists){
+        console.log("Username already exists!");//TODO: add notify
+    }
+    else {
+        secu_crypto.password_hash(vals[4],10,function(err,finalString){
+            vals[4]=finalString;
+            connection.query("INSERT INTO Users VALUES(NULL,?,?,?,?,?)", vals, function (err, rows, fields) {
+                if (!err) {
+                    res.end();
+                } else {
+                    console.log(err);
+                    res.end();
+                }
+            });
+                
+        });
+    }
     res.end();
 }
 
