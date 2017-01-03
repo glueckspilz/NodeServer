@@ -18,6 +18,16 @@ function root(req, res) {
     res.sendFile(path.resolve("html/admin.html"));
 };
 
+function users(req, res) {
+    res.sendFile(path.resolve("html/user.html"));
+};
+
+function privileges(req, res) {
+    res.sendFile(path.resolve("html/privileges.html"));
+};
+
+
+
 function getUsers(req, res) {
     connection.query("SELECT * FROM Users", function (err, rows, fields) {
         if (!err) {
@@ -82,19 +92,68 @@ function updateUser(req, res) {
 }
 
 
+function getPrivileges(req, res) {
+    connection.query("SELECT * FROM Privileges", function (err, rows, fields) {
+        if (!err) {
+            res.json(rows);
+        } else {
+            console.log(err);
+        }
+    });
+};
+
+function removePrivilege(req, res) {
+    for (var i = 0; i < req.body.ids.length; i++) {
+        connection.query("DELETE FROM Privileges WHERE PrivilegeID=?", [req.body.ids[i]], function (err, rows, fields) {
+            if (!err) {
+                res.end();
+            } else {
+                console.log(err);
+                res.end();
+            }
+        });
+    }
+    res.end();
+}
+
+function addPrivilege(req, res) {
+    var vals = [];
+    for (var o in req.body) {
+        vals.push(req.body[o]);
+    }
+    
+    res.end();
+}
+
+function updatePrivilege(req, res) {
+    var vals = [];
+    for (var o in req.body) {
+        vals.push(req.body[o]);
+    }
+
+    res.end();
+}
+
 
 /*Setup: Routes*/
 
 //GET
 router.get('/', root);
+
+router.get('/Users',users);
 router.get('/getUsers', getUsers);
 
+router.get('/Privileges',privileges);
+router.get('/getPrivileges',getPrivileges);
 
 //POST
 router.post('/removeUser', removeUser);
 router.post('/addUser', addUser);
 router.post('/updateUser', updateUser);
 
+router.post('/removePrivilege',removePrivilege);
+router.post('/addPrivilege',addPrivilege);
+router.post('/updatePrivilege',updatePrivilege);
 
 
 

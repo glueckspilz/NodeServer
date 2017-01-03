@@ -1,7 +1,7 @@
 
 var globals = {
     checkedRows: [],
-    columns: [
+    columns_Users: [
     {
         title: 'Selected',
         checkbox: true            
@@ -29,7 +29,22 @@ var globals = {
     {
         field: 'Password',
         title: 'Password'
-    }]
+    }],
+
+    columns_Privileges: [
+        {
+            title: 'Selected',
+            checkbox: true   
+        },
+        {
+            title: 'PrivilegeID',
+            field: 'PrivilegeID'
+        },
+        {
+            title: 'PrivilegeName',
+            field: 'PrivilegeName'            
+        }
+    ]
 };
 
 
@@ -46,10 +61,10 @@ function removeUser(){
     
     disable_delete(true);
     
-    update_table();
+    update_table('/admin/getUsers',globals.columns_Users);
 }
 
-function saveUser(){
+function updateUser(){
 
     var obj = {
         firstname,
@@ -72,7 +87,7 @@ function saveUser(){
     
     $.post('/admin/updateUser',obj);     
     
-    update_table(); 
+    update_table('/admin/getUsers',globals.columns_Users); 
 }
 
 function addUser(){
@@ -95,28 +110,28 @@ function addUser(){
     
     $.post('/admin/addUser',obj);     
     
-    update_table();
+    update_table('/admin/getUsers',globals.columns_Users);
 
 }
 
 function disable_delete(val){
     if(val){
-        $('#delete').prop('disabled',true);
+        $('#remove').prop('disabled',true);
     }else{
-            $('#delete').removeAttr('disabled');
+            $('#remove').removeAttr('disabled');
     }
 }
 
-function update_table(){
+function update_table(route,columns){
 
     $('#table').bootstrapTable('destroy');
 
-    $.getJSON('/admin/getUsers',function(data){
+    $.getJSON(route,function(data){
 
         console.log(data); //TODO: Remove Debug Code
         
         $('#table').bootstrapTable({
-            "columns": globals.columns,
+            "columns": columns,
             "data": data,
             "pagination": true,
             "pageSize": 10,
@@ -153,13 +168,61 @@ function update_table(){
     });
 }
 
-function init_secumod(){
+function init_secumod_users(){
         
-        $('button[name=refresh]').click(update_table);
-        $('button[name=add]').click(addUser);
-        $('button[name=save]').click(saveUser);
+        $('button[name=refresh]').click(function(){
+            update_table('/admin/getUsers',globals.columns_Users);
+        });
+
+        $('button[name=add]').click(function(){
+            $('#modal_add').modal();
+        });
+
+        $('button[name=update]').click(function(){
+            $('#modal_update').modal();
+        });
+
+        $('button[name=remove]').click(function(){
+            $('#modal_remove').modal();
+        });
+
+        $('button[name=add_confirm]').click(function(){
+            addUser();
+            $('#modal_add').modal('hide');
+        });
+
+         $('button[name=update_confirm]').click(function(){
+            updateUser();
+            $('#modal_update').modal('hide');
+        });
+        
+        $('button[name=remove_confirm]').click(function(){
+            removeUser();
+            $('#modal_remove').modal('hide');
+        });
+
         disable_delete(true);
-        update_table();
+        update_table('/admin/getUsers',globals.columns_Users);
         
 }
+
+
+
+
+function init_secumod_privileges(){
+        $('button[name=refresh]').click(function(){
+            update_table('/admin/getPrivileges',globals.columns_Privileges);
+        });
+        
+        //$('button[name=add]').click(addUser);
+        //$('button[name=save]').click(saveUser);
+        
+        disable_delete(true);
+        update_table('/admin/getPrivileges',globals.columns_Privileges);
+}
+
+function init_secumod_SQL(){
+
+}
+
 

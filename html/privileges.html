@@ -1,0 +1,22 @@
+    <script>
+        $('document').ready(init_secumod_privileges);
+    </script>
+
+    <div class="nav_buffer_top"></div>
+    <div class="container">
+        <h1>Privileges</h1>
+        <hr>
+        <div class="bootstrap-table">
+            <div class="fixed-table-toolbar">
+                <div class="bs-bars pull-left">
+                    <button id="delete" onclick="removeUser()" type="button" class="btn btn-large btn-block btn-danger"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                </div>
+                <div class="columns columns-right btn-group pull-right">
+                    <button class="btn btn-default" type="button" name="refresh" title="Refresh"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
+                </div>
+            </div>
+            <div class="fixed-table-container">
+                <table id="table"></table>
+            </div>
+        </div>
+    </div>
