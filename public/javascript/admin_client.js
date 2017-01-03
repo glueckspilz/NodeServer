@@ -64,7 +64,7 @@ function removeUser(){
     update_table('/admin/getUsers',globals.columns_Users);
 }
 
-function updateUser(){
+function updateUser(id,firstname,lastname,email, username, password){
 
     var obj = {
         firstname,
@@ -75,13 +75,12 @@ function updateUser(){
         id
     };
 
-    obj.id = $('input[name=id]').val();
-    obj.firstname = $('input[name=firstname]').val();
-    obj.lastname = $('input[name=lastname]').val();
-    obj.email = $('input[name=email]').val();
-    obj.username = $('input[name=username]').val();
-    obj.password = $('input[name=password]').val();
-
+    obj.id = id;
+    obj.firstname = firstname;
+    obj.lastname =lastname;
+    obj.email = email;
+    obj.username = username;
+    obj.password = password;
     
     console.log(obj); //TODO: Remove Debug Code
     
@@ -90,7 +89,7 @@ function updateUser(){
     update_table('/admin/getUsers',globals.columns_Users); 
 }
 
-function addUser(){
+function addUser(firstname,lastname,email, username, password){
     var obj = {
         firstname,
         lastname,
@@ -98,12 +97,12 @@ function addUser(){
         username,
         password
     };
-
-    obj.firstname = $('input[name=firstname_add]').val();
-    obj.lastname = $('input[name=lastname_add]').val();
-    obj.email = $('input[name=email_add]').val();
-    obj.username = $('input[name=username_add]').val();
-    obj.password = $('input[name=password_add]').val();
+  
+    obj.firstname = firstname;
+    obj.lastname =lastname;
+    obj.email = email;
+    obj.username = username;
+    obj.password = password;
 
     
     console.log(obj); //TODO: Remove Debug Code
@@ -187,12 +186,30 @@ function init_secumod_users(){
         });
 
         $('button[name=add_confirm]').click(function(){
-            addUser();
+            var 
+                firstname=$('input[name=username_add]').val(),
+                lastname=$('input[name=lastname_add]').val(),
+                email=$('input[name=email_add]').val(),
+                username=$('input[name=username_add]').val(),
+                password=$('input[name=password_add]').val();
+
+
+
+            addUser(firstname,lastname,email,username,password);
             $('#modal_add').modal('hide');
         });
 
          $('button[name=update_confirm]').click(function(){
-            updateUser();
+            var 
+                id=$('input[name=id]').val(),
+                firstname=$('input[name=username]').val(),
+                lastname=$('input[name=lastname]').val(),
+                email=$('input[name=email]').val(),
+                username=$('input[name=username]').val(),
+                password=$('input[name=password]').val();
+
+
+            updateUser(id,firstname,lastname,email,username,password);
             $('#modal_update').modal('hide');
         });
         
