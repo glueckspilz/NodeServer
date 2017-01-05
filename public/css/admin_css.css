@@ -10,18 +10,20 @@ body{
 .nav_top{
     position: absolute;
     width: 100vw;
-    height: 35px;
-    background-color: #D9B368;
+    height: 55px;
+    background-color: #85e0e0;
 
 }
 .hamburger{
     padding: 9px 16px;
+    color:#19334d; 
 }
 .nav_side{
     position: absolute;
-    top: 35px;
-    width: 140px; 
+    top: 55px;
+    width: 200px; 
     height: 100vh;
+    background-color: #9fbfdf; 
 
 }
 
@@ -30,12 +32,12 @@ body{
     padding: 0;
     list-style-type: none;
     width: inherit;
-    background: #EBEBF7;
+    background: #9fbfdf;
 }
 .nav_side>ul>li>a{
     display: block;
     padding: 8px 16px;
-    color: #837E85;
+    color: #19334d;
     text-decoration: none;
 }
 .nav_side>ul>li>a:hover{
