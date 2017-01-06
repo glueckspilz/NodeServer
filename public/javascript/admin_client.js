@@ -70,7 +70,17 @@ function removeUser(){
     
     update_table('/admin/getUsers',globals.columns_Users);
 }
-
+function updatePrivilege(id,name){
+    var obj = {
+        id,
+        name
+    };
+    obj.id=id;
+    obj.name=name;
+    console.log(obj);//Rebove debug Code
+    $post('/admin/updatePrivilege',obj);
+    update_table('/admin/getPrivileges',globals.columns_Privileges);
+}
 function updateUser(id,firstname,lastname,email, username, password){
 
     var obj = {
@@ -247,19 +257,37 @@ function init_secumod_privileges(){
         $('button[name=refresh]').click(function(){
             update_table('/admin/getPrivileges',globals.columns_Privileges);
         });
-        $('button[name=addprivbtn]').click(function(){
-            var 
-                id = $('input[name=privilegeid_add').val(),
-                name=$('input[name=privilegename_add').val();
+        $('button[name=addprivbtn']).click(function(){
+            $('modal_add').modal();
+        })
+        $('button[name=add_confirm']).click(function(){
+             var 
+                id = $('input[name=privilegeid_add]').val(),
+                name=$('input[name=privilegename_add]').val();
             addPrivilege(id,name);
             $('modal_update'.modal('hide');
-
         })
-        $('button[name=remove_confirm]').click(function(){
+        $('button[name=remove']).click(function(){
+            $('modal_remove').modal();
+        })
+        $('button[name=remove_confirm']).click(function(){
             removePrivilege();
             $('#modal_remove').modal('hide');
-        });    
-        
+
+        })
+        $('button[name=update]').click(function(){
+            $('#modal_update').modal();
+        });
+        $('button[name=update_confirm]').click(function(){
+            var
+                id =$('input[name=privilegeid_update]').val(),
+                name=$('input[name=privilegename_update]').val();
+            updatePrivilege(id,name);
+            $('modal_remove').modal('hide');
+               
+        })
+
+
         //$('button[name=add]').click(addUser);
         //$('button[name=save]').click(saveUser);
         
@@ -270,5 +298,3 @@ function init_secumod_privileges(){
 function init_secumod_SQL(){
 
 }
-
-
