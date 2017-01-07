@@ -9,7 +9,7 @@
         <div class="bootstrap-table">
             <div class="fixed-table-toolbar">
                 <div class="bs-bars pull-left">
-                    <button id="delete" onclick="removeUser()" type="button" class="btn btn-large btn-block btn-danger"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                    <button id="remove_privileges" type="button" class="btn btn-large btn-block btn-danger" name="remove_privileges"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                 </div>
                 <div class="columns columns-right btn-group pull-right">
                     <button class="btn btn-default" type="button" name="refresh" title="Refresh"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
@@ -18,6 +18,7 @@
             <div class="fixed-table-container">
                 <table id="table"></table>
             </div>
+
         <div class="row">
             <div class="col-xs-6">
                 <div class="container-fluid">
@@ -35,7 +36,7 @@
                                 </div>
                             </fieldset>
                         </form>
-                        <button type="button" class="btn btn-info" name="update">Update</button>
+                        <button type="button" class="btn btn-info" name="update_privileges">Update</button>
                     </div>
                 </div>
             </div>
@@ -59,13 +60,16 @@
                                     <input type="text" class="form-control" id="privilegename" name="privilegename_add">
                                 </div>
                                
-                            </fieldset>
+                            </fieldset> 
                         </form>
+                        <button class="btn btn-default" type="button" name="add_privileges">Add</button>
+                        
                     </div>
                 </div>
             </div>
         </div>
-<div class="modal fade" id="modal_add">
+
+<div class="modal fade" id="modal_add_privileges">
 
     <div class="modal-dialog" role="document">
 
@@ -95,11 +99,9 @@
 
 </div>
 </div>
-<div>
-    <button class="btn btn-default" type="button" name="addprivbtn">Add Privilege</button>
-</div>
 
-<div class="modal fade" id="modal_remove">
+
+<div class="modal fade" id="modal_remove_privileges">
 
     <div class="modal-dialog" role="document">
 
@@ -128,7 +130,7 @@
     </div>
 
 </div>
-<div class="modal fade" id="modal_update">
+<div class="modal fade" id="modal_update_privileges">
 
     <div class="modal-dialog" role="document">
 

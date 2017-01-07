@@ -18,7 +18,10 @@ var globals = {
     }, {
         field: 'Username',
         title: 'Username'
-    }, {
+    },{
+        field: 'Privileges',
+        title: 'Privileges'
+    },{
         field: 'Password',
         title: 'Password'
     }],
@@ -42,6 +45,12 @@ function removePrivilege() {
     for (var i = 0; i < globals.checkedRows.length; i++) {
         obj.ids.push(globals.checkedRows[i].PrivilegeID)
     }
+
+    $.post('/admin/removePrivilege', obj);
+
+    disable_delete(true);
+
+    update_table('/admin/getPrivileges', globals.columns_Privileges);
 }
 
 function removeUser() {
@@ -97,12 +106,12 @@ function updateUser(id, firstname, lastname, email, username, password) {
     update_table('/admin/getUsers', globals.columns_Users);
 }
 
-function addPrivilege(privilegeid, privilegename) {
+function addPrivilege(/*privilegeid,*/ privilegename) {
     var obj = {
-        id,
-        name
+        //id: Number,
+        name : String
     };
-    obj.id = privilegeid;
+  //  obj.id = privilegeid;
     obj.name = privilegename;
     console.log(obj); // Remove Debug Code
     $.post('/admin/addPrivilege', obj);
@@ -245,40 +254,43 @@ function init_secumod_users() {
 
 
 function init_secumod_privileges() {
+
     $('button[name=refresh]').click(function () {
         update_table('/admin/getPrivileges', globals.columns_Privileges);
     });
 
-    $('button[name=addprivbtn]').click(function () {
-        $('modal_add').modal();
+    $('button[name=add_privileges]').click(function () {
+        $('#modal_add_privileges').modal();
     });
 
     $('button[name=add_confirm]').click(function () {
-        var id = $('input[name=privilegeid_add]').val(),
-            name = $('input[name=privilegename_add]').val();
-        addPrivilege(id, name);
-        $('modal_update').modal('hide');
+            var  name = $('input[name=privilegename_add]').val();
+            //console.log(id);
+            console.log(name);
+        addPrivilege(name);
+        $('#modal_add_privileges').modal('hide');
+        update_table('/admin/getPrivileges',globals.columns_Privileges);
     });
 
-    $('button[name=remove]').click(function () {
-        $('modal_remove').modal();
+    $('button[name=remove_privileges]').click(function () {
+        $('#modal_remove_privileges').modal();
     });
 
     $('button[name=remove_confirm]').click(function () {
         removePrivilege();
-        $('#modal_remove').modal('hide');
-
+        $('#modal_remove_privileges').modal('hide');
+        //disable_delete(true);
     })
 
-    $('button[name=update]').click(function () {
-        $('#modal_update').modal();
+    $('button[name=update_privileges]').click(function () {
+        $('#modal_update_privileges').modal();
     });
 
     $('button[name=update_confirm]').click(function () {
         var id = $('input[name=privilegeid_update]').val(),
             name = $('input[name=privilegename_update]').val();
         updatePrivilege(id, name);
-        $('modal_remove').modal('hide');
+        $('#modal_update_privileges').modal('hide');
 
     });
 

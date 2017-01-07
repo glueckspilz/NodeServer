@@ -124,7 +124,7 @@ function removePrivilege(req, res) {
         connection.query("DELETE FROM Privileges WHERE PrivilegeID=?", [req.body.ids[i]], function (err, rows, fields) {
             if (!err) {
                 res.end();
-            } else {
+            } else {err, rows, fields
                 console.log(err);
                 res.end();
             }
@@ -138,6 +138,15 @@ function addPrivilege(req, res) {
     for (var o in req.body) {
         vals.push(req.body[o]);
     }
+    connection.query("INSERT INTO Privileges VALUES(NULL,?)",vals ,function(err, rows, fields){
+        if(!err){
+            res.end();
+        }else{
+            console.log(err);
+            res.end();
+        }
+
+    });
     
     res.end();
 }
