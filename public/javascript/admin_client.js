@@ -303,5 +303,13 @@ function init_secumod_privileges() {
 }
 
 function init_secumod_SQL() {
-
+    $('button[name=sql_send]').click(function(){
+        var obj=new Object();
+        obj.query=$('textarea[name=query_input]').val();
+        console.log(obj);
+        $.post('/admin/sendSql',obj).done(function(data){
+            console.log('DATA: '+ data);
+            $('#sql_resp').html(JSON.stringify(data));
+        });
+    });
 }
