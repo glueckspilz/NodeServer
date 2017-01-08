@@ -25,7 +25,9 @@ function users(req, res) {
 function privileges(req, res) {
     res.sendFile(path.resolve("html/privileges.html"));
 };
-
+function sql(req, res){
+    res.sendFile(path.resolve("html/sql.html"));
+};
 
 
 function getUsers(req, res) {
@@ -124,7 +126,7 @@ function removePrivilege(req, res) {
         connection.query("DELETE FROM Privileges WHERE PrivilegeID=?", [req.body.ids[i]], function (err, rows, fields) {
             if (!err) {
                 res.end();
-            } else {err, rows, fields
+            } else {
                 console.log(err);
                 res.end();
             }
@@ -159,6 +161,20 @@ function updatePrivilege(req, res) {
 
     res.end();
 }
+function sendSql(req,res){
+    console.log(req.body);
+    connection.query(req.body.query,function (err, rows, fields) {
+            if (!err) {
+                console.log(rows);
+                res.send(rows);
+            } else {
+                console.log(err);
+                //res.end();
+            }
+        res.end();
+
+        });
+}
 
 
 /*Setup: Routes*/
@@ -172,6 +188,8 @@ router.get('/getUsers', getUsers);
 router.get('/Privileges',privileges);
 router.get('/getPrivileges',getPrivileges);
 
+router.get('/SQL',sql);
+
 //POST
 router.post('/removeUser', removeUser);
 router.post('/addUser', addUser);
@@ -180,6 +198,8 @@ router.post('/updateUser', updateUser);
 router.post('/removePrivilege',removePrivilege);
 router.post('/addPrivilege',addPrivilege);
 router.post('/updatePrivilege',updatePrivilege);
+
+router.post('/sendSql',sendSql);
 
 
 

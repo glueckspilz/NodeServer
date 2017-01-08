@@ -34,7 +34,11 @@
             });
         }
 
-        function httpGetSQLPage() {}
+        function httpGetSQLPage() {
+            $.get('/admin/SQL',function(data){
+                $('#content').html(data);
+            });
+        }
 
         function toggleSidebar(){
 
