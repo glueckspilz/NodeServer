@@ -182,24 +182,24 @@ function sendSql(req,res){
 //GET
 router.get('/',require('connect-ensure-login').ensureLoggedIn(), root);
 
-router.get('/Users',users);
-router.get('/getUsers', getUsers);
+router.get('/Users',require('connect-ensure-login').ensureLoggedIn(),users);
+router.get('/getUsers',require('connect-ensure-login').ensureLoggedIn(), getUsers);
 
-router.get('/Privileges',privileges);
-router.get('/getPrivileges',getPrivileges);
+router.get('/Privileges',require('connect-ensure-login').ensureLoggedIn(),privileges);
+router.get('/getPrivileges',require('connect-ensure-login').ensureLoggedIn(),getPrivileges);
 
-router.get('/SQL',sql);
+router.get('/SQL',require('connect-ensure-login').ensureLoggedIn(),sql);
 
 //POST
-router.post('/removeUser', removeUser);
-router.post('/addUser', addUser);
-router.post('/updateUser', updateUser);
+router.post('/removeUser', require('connect-ensure-login').ensureLoggedIn(),removeUser);
+router.post('/addUser', require('connect-ensure-login').ensureLoggedIn(),addUser);
+router.post('/updateUser',require('connect-ensure-login').ensureLoggedIn(), updateUser);
 
-router.post('/removePrivilege',removePrivilege);
-router.post('/addPrivilege',addPrivilege);
-router.post('/updatePrivilege',updatePrivilege);
+router.post('/removePrivilege',require('connect-ensure-login').ensureLoggedIn(),removePrivilege);
+router.post('/addPrivilege',require('connect-ensure-login').ensureLoggedIn(),addPrivilege);
+router.post('/updatePrivilege',require('connect-ensure-login').ensureLoggedIn(),updatePrivilege);
 
-router.post('/sendSql',sendSql);
+router.post('/sendSql',require('connect-ensure-login').ensureLoggedIn(),sendSql);
 
 
 
