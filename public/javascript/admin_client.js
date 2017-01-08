@@ -50,7 +50,7 @@ function removePrivilege() {
 
     disable_delete(true);
 
-    update_table('/admin/getPrivileges', globals.columns_Privileges);
+    update_table('/admin/getPrivileges');
 }
 
 function removeUser() {
@@ -66,7 +66,7 @@ function removeUser() {
 
     disable_delete(true);
 
-    update_table('/admin/getUsers', globals.columns_Users);
+    update_table('/admin/getUsers');
 }
 
 function updatePrivilege(id, name) {
@@ -78,7 +78,7 @@ function updatePrivilege(id, name) {
     obj.name = name;
     console.log(obj); //Rebove debug Code
     $post('/admin/updatePrivilege', obj);
-    update_table('/admin/getPrivileges', globals.columns_Privileges);
+    update_table('/admin/getPrivileges');
 }
 
 function updateUser(id, firstname, lastname, email, username, password) {
@@ -103,7 +103,7 @@ function updateUser(id, firstname, lastname, email, username, password) {
 
     $.post('/admin/updateUser', obj);
 
-    update_table('/admin/getUsers', globals.columns_Users);
+    update_table('/admin/getUsers');
 }
 
 function addPrivilege(/*privilegeid,*/ privilegename) {
@@ -115,7 +115,7 @@ function addPrivilege(/*privilegeid,*/ privilegename) {
     obj.name = privilegename;
     console.log(obj); // Remove Debug Code
     $.post('/admin/addPrivilege', obj);
-    update_table('/admin/getPrivileges', globals.columns_Privileges);
+    update_table('/admin/getPrivileges');
 }
 
 function addUser(firstname, lastname, email, username, password) {
@@ -138,7 +138,7 @@ function addUser(firstname, lastname, email, username, password) {
 
     $.post('/admin/addUser', obj);
 
-    update_table('/admin/getUsers', globals.columns_Users);
+    update_table('/admin/getUsers');
 
 }
 
@@ -150,16 +150,23 @@ function disable_delete(val) {
     }
 }
 
-function update_table(route, columns) {
+function update_table(route) {
 
     $('#table').bootstrapTable('destroy');
 
     $.getJSON(route, function (data) {
 
+        var cols = [];
+        for(var key in data[0]){
+            cols.push({
+                title:key.toString(),
+                field:key.toString()
+            });
+        } 
         console.log(data); //TODO: Remove Debug Code
 
         $('#table').bootstrapTable({
-            "columns": columns,
+            "columns": cols,
             "data": data,
             "pagination": true,
             "pageSize": 10,
@@ -199,7 +206,7 @@ function update_table(route, columns) {
 function init_secumod_users() {
 
     $('button[name=refresh]').click(function () {
-        update_table('/admin/getUsers', globals.columns_Users);
+        update_table('/admin/getUsers');
     });
 
     $('button[name=add]').click(function () {
@@ -246,7 +253,7 @@ function init_secumod_users() {
     });
 
     disable_delete(true);
-    update_table('/admin/getUsers', globals.columns_Users);
+    update_table('/admin/getUsers');
 
 }
 
@@ -256,7 +263,7 @@ function init_secumod_users() {
 function init_secumod_privileges() {
 
     $('button[name=refresh]').click(function () {
-        update_table('/admin/getPrivileges', globals.columns_Privileges);
+        update_table('/admin/getPrivileges');
     });
 
     $('button[name=add_privileges]').click(function () {
@@ -269,7 +276,7 @@ function init_secumod_privileges() {
             console.log(name);
         addPrivilege(name);
         $('#modal_add_privileges').modal('hide');
-        update_table('/admin/getPrivileges',globals.columns_Privileges);
+        update_table('/admin/getPrivileges');
     });
 
     $('button[name=remove_privileges]').click(function () {
@@ -299,7 +306,7 @@ function init_secumod_privileges() {
     //$('button[name=save]').click(saveUser);
 
     disable_delete(true);
-    update_table('/admin/getPrivileges', globals.columns_Privileges);
+    update_table('/admin/getPrivileges');
 }
 
 function init_secumod_SQL() {
@@ -314,6 +321,7 @@ function init_secumod_SQL() {
         });
     });
 }
+
 function show_table(data){
         $('#table').bootstrapTable('destroy');
         var cols = [];
