@@ -157,6 +157,10 @@ function update_table(route) {
     $.getJSON(route, function (data) {
 
         var cols = [];
+        cols.push({
+        title: 'Selected',
+        checkbox: true
+        });
         for(var key in data[0]){
             cols.push({
                 title:key.toString(),
