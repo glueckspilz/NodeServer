@@ -180,7 +180,7 @@ function sendSql(req,res){
 /*Setup: Routes*/
 
 //GET
-router.get('/', root);
+router.get('/',require('connect-ensure-login').ensureLoggedIn(), root);
 
 router.get('/Users',users);
 router.get('/getUsers', getUsers);

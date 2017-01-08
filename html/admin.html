@@ -44,6 +44,10 @@
 
             $('#Sidebar').slideToggle(400);
         }
+        function logout(){
+            $.get('/login/logout');
+            $(location).attr('href','/');
+        }
       
     </script>
 
@@ -62,6 +66,7 @@
             <li><a href="#" onclick="httpGetUserPage()">Users</a></li>
             <li><a href="#" onclick="httpGetPrivilegePage()">Privileges</a></li>
             <li><a href="#" onclick="httpGetSQLPage()">SQL</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
         </ul>
     </nav>
 
