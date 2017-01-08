@@ -309,7 +309,27 @@ function init_secumod_SQL() {
         console.log(obj);
         $.post('/admin/sendSql',obj).done(function(data){
             console.log('DATA: '+ data);
-            $('#sql_resp').html(JSON.stringify(data));
+            show_table(data);
+            //$('#sql_resp').html(JSON.stringify(data));
         });
     });
+}
+function show_table(data){
+        $('#table').bootstrapTable('destroy');
+        var cols = [];
+
+        for(var key in data[0]){
+            cols.push({
+                title: key.toString(),
+                field : key.toString()
+            });
+        }
+
+        $('#table').bootstrapTable({
+            "data": data,
+            "columns": cols,
+            "pagination": true,
+            "pageSize": 10,
+            "search": true
+        });
 }
