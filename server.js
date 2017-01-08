@@ -1,5 +1,6 @@
 /*Imports : System*/
 var fs = require('fs');
+var path = require('path');
 var mysql = require('mysql');
 var https = require('https');
 var express = require('express');
@@ -78,6 +79,11 @@ function init(){
     init_obj.app.use('/', route_index);
     init_obj.app.use('/login', route_login);
     init_obj.app.use('/admin',route_admin);
+
+    init_obj.app.use(function(req, res, next){
+     res.status(404);
+     res.sendFile(path.resolve('html/error.html'));
+    });
 
     init_obj.credentials.key = fs.readFileSync(config.server.key,'utf8');
     init_obj.credentials.cert = fs.readFileSync(config.server.cert,'utf8');
