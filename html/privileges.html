@@ -1,7 +1,19 @@
+<head>
+    <title>Privileges</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script> 
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/privileges_css.css">
+
     <script>
         $('document').ready(init_secumod_privileges);
     </script>
+</head>
 
+<body>
     <div class="nav_buffer_top"></div>
     <div class="container">
         <h1>Privileges</h1>
@@ -18,21 +30,22 @@
             <div class="fixed-table-container">
                 <table id="table"></table>
             </div>
-                        <div class="col-xs-6">
+            <div class="col-xs-6">
                 <div class="container-fluid">
                     <div id="form-user-add">
                         <form class="form-horizontal">
-                            <fieldset>
-                                <legend>Add</legend>
-                                <label class="control-label col-xs-2" for="id">PrivilegeID</label>
-                                <div class="col-xs-4">
+                            <fieldset class="add">
+                                <legend class="add">Add</legend>
+                                <div class= "col-xs-4">
+                                    <label class="control-label col-xs-2" for="id">PrivilegeID</label>
+                                    </br>
                                     <input type="text" class="form-control" id="privilegeid" name="privilegeid_add" readonly>
                                 </div>
-                                <label class="control-label col-xs-2" for="firstname">PribilegeName</label>
                                 <div class="col-xs-4">
+                                    <label class="control-label col-xs-2" for="firstname">PrivilegeName</label>
+                                    </br>
                                     <input type="text" class="form-control" id="privilegename" name="privilegename_add">
                                 </div>
-                               
                             </fieldset>
                         </form>
                     </div>
@@ -102,3 +115,4 @@
     </div>
 
 </div>
+</body>
