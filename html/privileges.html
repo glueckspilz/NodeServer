@@ -1,24 +1,24 @@
-    <script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
         $('document').ready(init_secumod_privileges);
     </script>
-
-    <div class="nav_buffer_top"></div>
-    <div class="container">
-        <h1>Privileges</h1>
-        <hr>
-        <div class="bootstrap-table">
-            <div class="fixed-table-toolbar">
-                <div class="bs-bars pull-left">
-                    <button id="remove_privileges" type="button" class="btn btn-large btn-block btn-danger" name="remove_privileges"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                </div>
-                <div class="columns columns-right btn-group pull-right">
-                    <button class="btn btn-default" type="button" name="refresh" title="Refresh"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
-                </div>
+<div class="nav_buffer_top"></div>
+<div class="container">
+    <h1>Privileges</h1>
+    <hr>
+    <div class="bootstrap-table">
+        <div class="fixed-table-toolbar">
+            <div class="bs-bars pull-left">
+                <button id="remove_privileges" type="button" class="btn btn-large btn-block btn-danger" name="remove_privileges"><i class="glyphicon glyphicon-remove"></i> Remove</button>
             </div>
-            <div class="fixed-table-container">
-                <table id="table"></table>
+            <div class="columns columns-right btn-group pull-right">
+                <button class="btn btn-default" type="button" name="refresh" title="Refresh"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
             </div>
-
+        </div>
+        <div class="fixed-table-container">
+            <table id="table"></table>
+        </div>
         <div class="row">
             <div class="col-xs-6">
                 <div class="container-fluid">
@@ -32,7 +32,7 @@
                                 </div>
                                 <label class="control-label col-xs-2" for="firstname">PrivilegeName</label>
                                 <div class="col-xs-4">
-                                    <input type="text" class="form-control" id ="privilegename" name="privilegename_update">
+                                    <input type="text" class="form-control" id="privilegename" name="privilegename_update">
                                 </div>
                             </fieldset>
                         </form>
@@ -40,11 +40,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
             <div class="col-xs-6">
                 <div class="container-fluid">
                     <div id="form-user-add">
@@ -59,103 +54,68 @@
                                 <div class="col-xs-4">
                                     <input type="text" class="form-control" id="privilegename" name="privilegename_add">
                                 </div>
-                               
-                            </fieldset> 
+                            </fieldset>
                         </form>
                         <button class="btn btn-default" type="button" name="add_privileges">Add</button>
-                        
                     </div>
                 </div>
             </div>
         </div>
-
-<div class="modal fade" id="modal_add_privileges">
-
-    <div class="modal-dialog" role="document">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Info</h4>
+        <div class="modal fade" id="modal_add_privileges">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="bs-callout bs-callout-warning">
+                            This will add a new privilege to the system.<br/> Do you want to proceed?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" name="add_confirm">Confirm</button>
+                    </div>
+                </div>
             </div>
-           
-           
-            <div class="modal-body">
-
-               <p class="bs-callout bs-callout-warning">
-                    This will add a new privilege to the system.<br/>
-                    Do you want to proceed?
-               </p>
-               
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" name="add_confirm">Confirm</button>
-            </div>
-        
         </div>
     </div>
-
-</div>
-</div>
-
-
-<div class="modal fade" id="modal_remove_privileges">
-
-    <div class="modal-dialog" role="document">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Warning</h4>
+    <div class="modal fade" id="modal_remove_privileges">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="bs-callout bs-callout-warning">
+                        <bold>This will remove all currently selected entries.</bold><br/> Do you want to proceed?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" name="remove_confirm">Confirm</button>
+                </div>
             </div>
-           
-           
-            <div class="modal-body">
-
-               <p class="bs-callout bs-callout-warning">
-                    <bold>This will remove all currently selected entries.</bold><br/>
-                    Do you want to proceed?
-               </p>
-               
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" name="remove_confirm">Confirm</button>
-            </div>
-        
         </div>
     </div>
-
-</div>
-<div class="modal fade" id="modal_update_privileges">
-
-    <div class="modal-dialog" role="document">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Warning</h4>
+    <div class="modal fade" id="modal_update_privileges">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Warning</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="bs-callout bs-callout-warning">
+                        This will change the currently selected entry.<br/> Do you want to proceed?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" name="update_confirm">Confirm</button>
+                </div>
             </div>
-           
-           
-            <div class="modal-body">
-
-               <p class="bs-callout bs-callout-warning">
-                    This will change the currently selected entry.<br/>
-                    Do you want to proceed?
-               </p>
-               
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" name="update_confirm">Confirm</button>
-            </div>
-        
         </div>
     </div>
-
-</div>
