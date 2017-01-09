@@ -158,12 +158,20 @@ function update_table(route) {
 
 
         var cols = [];
+<<<<<<< HEAD
+        cols.push({
+        title: 'Selected',
+        checkbox: true
+        });
+        for(var key in data[0]){
+=======
 	cols.push({
 	    title: 'Selected',
             checkbox: true
 	});
 
 	for(var key in data[0]){
+>>>>>>> upstream/master
             cols.push({
                 title:key.toString(),
                 field:key.toString()
@@ -314,18 +322,37 @@ function init_secumod_privileges() {
     disable_delete(true);
     update_table('/admin/getPrivileges');
 }
-
 function init_secumod_SQL() {
-    $('button[name=sql_send]').click(function(){
-        var obj=new Object();
-        obj.query=$('textarea[name=query_input]').val();
-        console.log(obj);
-        $.post('/admin/sendSql',obj).done(function(data){
-            console.log('DATA: '+ data);
-            show_table(data);
-            //$('#sql_resp').html(JSON.stringify(data));
+    $('button[name=sql_send]').click(function () {
+        var obj = new Object();
+        obj.query = $('textarea[name=query_input]').val();
+        check_drop(obj.query, function (contains) {
+            if (contains) {
+                $("#drop_modal").modal();
+            } else {
+                execute_query(obj);
+            }
         });
     });
+
+    $('button[name=drop_confirm]').click(function () {
+        var obj = new Object();
+        obj.query = $('textarea[name=query_input]').val();
+        execute_query(obj);
+        $("#drop_modal").modal('hide');
+        
+    });
+    
+}
+
+function execute_query(obj){
+            console.log(obj);
+                $.post('/admin/sendSql', obj).done(function (data) {
+                    console.log('DATA: ' + data);
+                    show_table(data);
+                    //$('#sql_resp').html(JSON.stringify(data));
+                });
+    
 }
 
 function show_table(data){
@@ -347,3 +374,9 @@ function show_table(data){
             "search": true
         });
 }
+
+function check_drop(input,cb){
+    var drop_check= input.includes("drop");
+    cb(drop_check);
+}
+
