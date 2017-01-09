@@ -2,8 +2,12 @@
 <html lang="en">
 
 <head>
+<<<<<<< HEAD
     <title>LOGIN</title>
     
+=======
+    <title>Sign In</title>
+>>>>>>> upstream/master
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -22,6 +26,7 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
         crossorigin="anonymous"></script>
+<<<<<<< HEAD
 
 </head>
 
@@ -35,6 +40,27 @@
         </br>
         <input type="submit" class="btn btn-default" id="submit" name="login" value="Submit">
     </form>
+=======
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+   <div class="container">
+
+      <form class="form-signin" action="/login/login" method="POST">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+        <div class="checkbox">
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div>
+
+>>>>>>> upstream/master
 </body>
 
 </html>
