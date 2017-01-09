@@ -8,7 +8,7 @@ config.mysql = {};
 /*Definitions*/
 config.mysql.host = "localhost";
 config.mysql.user = "root";
-config.mysql.password = "secumod";
+config.mysql.password = "toor";
 config.mysql.database = "SecuMod";
 
 

@@ -156,8 +156,14 @@ function update_table(route) {
 
     $.getJSON(route, function (data) {
 
+
         var cols = [];
-        for(var key in data[0]){
+	cols.push({
+	    title: 'Selected',
+            checkbox: true
+	});
+
+	for(var key in data[0]){
             cols.push({
                 title:key.toString(),
                 field:key.toString()
@@ -222,7 +228,7 @@ function init_secumod_users() {
     });
 
     $('button[name=add_confirm]').click(function () {
-        var firstname = $('input[name=username_add]').val(),
+        var firstname = $('input[name=firstname_add]').val(),
             lastname = $('input[name=lastname_add]').val(),
             email = $('input[name=email_add]').val(),
             username = $('input[name=username_add]').val(),
@@ -236,7 +242,7 @@ function init_secumod_users() {
 
     $('button[name=update_confirm]').click(function () {
         var id = $('input[name=id]').val(),
-            firstname = $('input[name=username]').val(),
+            firstname = $('input[name=firstname]').val(),
             lastname = $('input[name=lastname]').val(),
             email = $('input[name=email]').val(),
             username = $('input[name=username]').val(),

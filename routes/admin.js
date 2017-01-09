@@ -66,6 +66,7 @@ function addUser(req, res) {
                 if (vals[3]==""||vals[3]==undefined||vals[4]==""||vals[4]==undefined){
                     console.log("username and password can't be empty!");//TODO: add user notify
                 }else {
+		    console.log(vals);
                     secu_crypto.password_hash(vals[4],10,function(err,finalString){
                         vals[4]=finalString;
                         connection.query("INSERT INTO Users VALUES(NULL,?,?,?,?,?)", vals, function (err, rows, fields) {
@@ -96,6 +97,10 @@ function updateUser(req, res) {
     for (var o in req.body) {
         vals.push(req.body[o]);
     }
+
+    if (vals[3]==""||vals[3]==undefined||vals[4]==""||vals[4]==undefined){
+        console.log("username and password can't be empty!");//TODO: add user notify
+    }else{	
     secu_crypto.password_hash(vals[4],10,function(err,finalString){
         vals[4]=finalString;
         connection.query("UPDATE Users SET FirstName=?, LastName=?, EmailAddress=?, Username=?, Password=? WHERE UserID=? ", vals, function (err, rows, fields) {
@@ -107,6 +112,7 @@ function updateUser(req, res) {
             }
         });
     });
+    }
     res.end();
 }
 
