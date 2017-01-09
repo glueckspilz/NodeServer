@@ -66,6 +66,7 @@ function addUser(req, res) {
                 if (vals[3]==""||vals[3]==undefined||vals[4]==""||vals[4]==undefined){
                     console.log("username and password can't be empty!");//TODO: add user notify
                 }else {
+		    console.log(vals);
                     secu_crypto.password_hash(vals[4],10,function(err,finalString){
                         vals[4]=finalString;
                         connection.query("INSERT INTO Users VALUES(NULL,?,?,?,?,?)", vals, function (err, rows, fields) {
@@ -96,6 +97,10 @@ function updateUser(req, res) {
     for (var o in req.body) {
         vals.push(req.body[o]);
     }
+
+    if (vals[3]==""||vals[3]==undefined||vals[4]==""||vals[4]==undefined){
+        console.log("username and password can't be empty!");//TODO: add user notify
+    }else{	
     secu_crypto.password_hash(vals[4],10,function(err,finalString){
         vals[4]=finalString;
         connection.query("UPDATE Users SET FirstName=?, LastName=?, EmailAddress=?, Username=?, Password=? WHERE UserID=? ", vals, function (err, rows, fields) {
@@ -107,6 +112,7 @@ function updateUser(req, res) {
             }
         });
     });
+    }
     res.end();
 }
 
@@ -182,24 +188,24 @@ function sendSql(req,res){
 //GET
 router.get('/',require('connect-ensure-login').ensureLoggedIn(), root);
 
-router.get('/Users',users);
-router.get('/getUsers', getUsers);
+router.get('/Users',require('connect-ensure-login').ensureLoggedIn(),users);
+router.get('/getUsers',require('connect-ensure-login').ensureLoggedIn(), getUsers);
 
-router.get('/Privileges',privileges);
-router.get('/getPrivileges',getPrivileges);
+router.get('/Privileges',require('connect-ensure-login').ensureLoggedIn(),privileges);
+router.get('/getPrivileges',require('connect-ensure-login').ensureLoggedIn(),getPrivileges);
 
-router.get('/SQL',sql);
+router.get('/SQL',require('connect-ensure-login').ensureLoggedIn(),sql);
 
 //POST
-router.post('/removeUser', removeUser);
-router.post('/addUser', addUser);
-router.post('/updateUser', updateUser);
+router.post('/removeUser', require('connect-ensure-login').ensureLoggedIn(),removeUser);
+router.post('/addUser', require('connect-ensure-login').ensureLoggedIn(),addUser);
+router.post('/updateUser',require('connect-ensure-login').ensureLoggedIn(), updateUser);
 
-router.post('/removePrivilege',removePrivilege);
-router.post('/addPrivilege',addPrivilege);
-router.post('/updatePrivilege',updatePrivilege);
+router.post('/removePrivilege',require('connect-ensure-login').ensureLoggedIn(),removePrivilege);
+router.post('/addPrivilege',require('connect-ensure-login').ensureLoggedIn(),addPrivilege);
+router.post('/updatePrivilege',require('connect-ensure-login').ensureLoggedIn(),updatePrivilege);
 
-router.post('/sendSql',sendSql);
+router.post('/sendSql',require('connect-ensure-login').ensureLoggedIn(),sendSql);
 
 
 
